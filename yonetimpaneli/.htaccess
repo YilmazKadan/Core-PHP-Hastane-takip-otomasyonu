@@ -1,0 +1,21 @@
+Options -Indexes
+
+RewriteEngine On
+RewriteBase /VTYS/yonetimpaneli
+RewriteRule ^Anasayfa$ index.php [NC]
+RewriteRule ^tezler$ index.php?sayfa=tezler [NC]
+RewriteRule ^iletisim$ index.php?sayfa=iletisimliste [NC]
+
+RewriteRule ^sayfa/(.*)$ index.php?sayfa=$1 [NC]
+RewriteRule ^duzenle/(.*)/(.*)$ index.php?sayfa=$1&id=$2 [NC]
+RewriteRule ^ayarlar/(.*)$ index.php?sayfa=$1 [NC]
+RewriteRule ^oduncteslimal/(.*)$ index.php?sayfa=oduncteslimal&id=$1 [NC]
+RewriteRule ^iletisimdetay/(.*)$ index.php?sayfa=iletisimdetay&id=$1 [NC]
+RewriteRule ^sil/(.*)/(.*)$ data/islem.php?islem=sil&tablo=$1&id=$2 [NC]
+
+RewriteRule ^giris-yap$ giris.php [NC]
+RewriteRule ^kayit-ol$ kayitol.php [NC]
+RewriteRule ^sifre-degistir$ sifredegistir.php [NC]
+RewriteRule ^sifre-kurtar$ sifrekurtar.php [NC]
+ErrorDocument 404 /VTYS/yonetimpaneli/Anasayfa
+ErrorDocument 403 /Kutuphane/yonetimpaneli/erisim.php
