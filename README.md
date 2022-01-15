@@ -25,7 +25,7 @@ The URL must end with 'yonetimpaneli/' , the other part is for you . For example
 ![image](https://user-images.githubusercontent.com/44698680/149620271-54676bb3-f46e-471c-912e-a1b4b0121e16.png)
 
 # Giriş Ekranı
-![image](https://user-images.githubusercontent.com/44698680/149620272-1d2e9040-c32b-4244-b9fc-97f60ff6c9d2.png)
+![screenshot](https://user-images.githubusercontent.com/44698680/149625480-431ed20c-d427-422e-a339-fb0a482e4bc7.png)
 
 # Bilgilerim Güncelleme/Görüntüleme
 ![image](https://user-images.githubusercontent.com/44698680/149620289-5ca5acbb-7a1f-4692-96a7-563683e83cd2.png)
