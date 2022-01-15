@@ -18,6 +18,7 @@ $(document).ready(function () {
 
     //  Ajax modunu ssp sınıfını kullanırken her  datatableye özel get parametresi yollamak amaçlı kullanıyorum.
     var ajaxModu = $('#example1').data("ajaxid");
+    var tabloIsmi = $('#example1').data("printname");
     $('#example1').DataTable({
         processing: true,
         serverSide: true,
@@ -36,6 +37,8 @@ $(document).ready(function () {
         "buttons": [
             {
                 extend : "csv",
+                charset: 'UTF-8',
+                bom: true,
                 exportOptions: {
                     columns: 'th:not(:last-child)'
                  }
@@ -54,6 +57,7 @@ $(document).ready(function () {
             },
             {
                 extend : "print",
+                title: `${tabloIsmi}`,
                 exportOptions: {
                     columns: 'th:not(:last-child)'
                  }

@@ -25,7 +25,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" data-ajaxid = "doktorliste" class="table table-bordered table-striped">
+                            <table id="example1" data-printname = "Doktor tablosu " data-ajaxid = "doktorliste" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Doktor Adı</th>

@@ -36,10 +36,6 @@
                                         <input type="email" name="uyeMail" required class="form-control" placeholder="Üye adı giriniz...">
                                     </div>
                                     <div class="form-group">
-                                        <label>Üye Okul</label>
-                                        <input type="text" name="uyeOkul" required class="form-control" placeholder="Üye okul bilgisi giriniz...">
-                                    </div>
-                                    <div class="form-group">
                                         <label>Üye Tc Kimlik Numarası</label>
                                         <input type="text" name="uyeTc" required class="form-control" placeholder="Üye TC kimlik numarası giriniz...">
                                     </div>

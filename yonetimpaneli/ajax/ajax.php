@@ -455,6 +455,63 @@ if ($VT->yetkiKontrol() and !empty($_GET['mode'])) {
             SSP::simple($_GET, $dbDetails, $table, $primaryKey, $columns)
         );
     }
+    // Poliklnik kayıt   LİSTESİ
+    else if ($_GET['mode'] == 'pol_kayitliste' and $VT->yetkiKontrol(2)) {
+        $table =
+            "(SELECT 
+            pol_kayit.ID,
+            pol_kayit.tani as tani , 
+            pol_kayit.h_kayit_tarihi as kayitTarihi,
+            pol_kayit.taburcu_durumu as taburcuDurumu,
+            pol_dal.pol_ad as polAd,
+            CONCAT(doktor.AD , ' ' , doktor.SOYAD) as doktorAd,
+            CONCAT(hasta.h_tcno,'-->',hasta.h_ad , ' ' , hasta.h_soyad) as hastaBilgi
+
+            from hastane.pol_kayit pol_kayit
+
+             INNER JOIN hastane.pol_dal pol_dal
+                                    
+             ON  pol_dal.ID = pol_kayit.pol_no  
+             
+             INNER JOIN hastane.doktor doktor  
+             ON doktor.ID = pol_kayit.dr_no
+
+             INNER JOIN hastane.hasta hasta 
+
+             ON hasta.ID = pol_kayit.hasta_id
+             
+             
+             )temp";
+        $primaryKey = 'ID';
+
+        $columns = array(
+
+            array('db' => 'polAd', 'dt' => 0, 'formatter' => function ($ad) {
+                return stripslashes($ad);
+            }),
+            array('db' => 'doktorAd', 'dt' => 1, 'formatter' => function ($ad) {
+                return stripslashes($ad);
+            }),
+            array('db' => 'hastaBilgi', 'dt' => 2, 'formatter' => function ($ad) {
+                return stripslashes($ad);
+            }),
+            array('db' => 'tani', 'dt' => 3, 'formatter' => function ($ad) {
+                return stripslashes($ad);
+            }),
+            array('db' => 'kayitTarihi', 'dt' => 4, 'formatter' => function ($ad) {
+                return stripslashes($ad);
+            }),
+            array('db' => 'ID',  'dt' => 5, 'formatter' => function ($ID) {
+
+                return "<a class ='btn btn-primary' href='duzenle/uyeduzenle/{$ID}'>Düzenle</a> ";
+            })
+
+        );
+        // Json çıkışı
+        echo json_encode(
+            SSP::simple($_GET, $dbDetails, $table, $primaryKey, $columns)
+        );
+    }
     // ÖDÜNÇ  LİSTESİ
     else if ($_GET['mode'] == 'oduncliste' and $VT->yetkiKontrol(2)) {
         $table =

@@ -14,7 +14,7 @@
           $_SESSION['uye'] = $uye[0];
           // Giriş yapan kullanıcının hesabının hangi yetkide(Admin,user,personel)olduğunu veritabanından çekiyoruz ve sessiona aktarıyoruz.
           $_SESSION['uye']['uyelikturu'] = $VT->veriGetir("SELECT * from hastane.tblyetkiler  ","WHERE ID = ?",array($uye[0]['KULLANICIYETKI']))[0]['YETKIAD'];
-          if($VT->yetkiKontrol(2))
+          if($VT->yetkiKontrol(1))
             $VT->yonlendir(SITE."Anasayfa");
           else
             $VT->yonlendir(SITE."../uyepanel/Anasayfa");

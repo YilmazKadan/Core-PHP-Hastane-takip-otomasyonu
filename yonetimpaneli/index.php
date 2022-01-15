@@ -9,7 +9,7 @@ include_once(DATA . "baglanti.php");
 // Css ve js dosyalarını yonetim panelinden çekeceğimiz için ayrı bir sabit daha
 define("SITE", $url);
 if ($VT->yetkiKontrol()) {
-  if (!$VT->yetkiKontrol(2)) {
+  if (!$VT->yetkiKontrol(1)) {
     $VT->mesajOlustur("hata", "Yönetici seviyesinden bir alana erişim sağlayamazsınız!!");
     $VT->yonlendir(SITE . "../uyepanel/Anasayfa");
   } else {
@@ -22,10 +22,11 @@ if ($VT->yetkiKontrol()) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?=$baslik?></title>
+  <title><?= $baslik ?></title>
   <base href="<?= SITE ?>">
   <link rel="icon" href="<?php SITE ?>../images/logo.png" type="image/x-icon" />
   <!-- Google Font: Source Sans Pro -->
@@ -51,13 +52,13 @@ if ($VT->yetkiKontrol()) {
   <link rel="stylesheet" href="<?= SITE ?>dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?= SITE ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?= SITE ?>plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?= SITE ?>plugins/summernote/summernote-bs4.min.css">
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="<?= SITE ?>plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="<?= SITE ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <style>
     .td-image {
       width: 100px;
@@ -144,8 +145,21 @@ if ($VT->yetkiKontrol()) {
   <script src="<?= SITE ?>plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- Toastr -->
   <script src="<?= SITE ?>plugins/toastr/toastr.min.js"></script>
+  <!-- InputMask -->
+  <script src="<?= SITE ?>plugins/moment/moment.min.js"></script>
+  <script src="<?= SITE ?>plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="<?= SITE ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
   <!-- CUSTOM JS -->
   <script src="<?= SITE ?>dist/js/custom.js"></script>
+
+
+  <!-- AdminLTE App -->
+  <script src="<?= SITE ?>dist/js/adminlte.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="<?= SITE ?>dist/js/demo.js"></script>
+
   <script>
     <?php
     // TOAST FIRE MESAJI VERME
@@ -169,13 +183,12 @@ if ($VT->yetkiKontrol()) {
       unset($_SESSION['durum']);
     }
     ?>
+
+    //Date picker
+    $('#dogumtarihi').datetimepicker({
+      format: 'yyyy-MM-DD'
+    });
   </script>
-  <!-- AdminLTE App -->
-  <script src="<?= SITE ?>dist/js/adminlte.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="<?= SITE ?>dist/js/demo.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="<?= SITE ?>dist/js/pages/dashboard.js"></script>
 
 </body>
 

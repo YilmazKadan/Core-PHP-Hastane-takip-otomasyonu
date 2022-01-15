@@ -23,20 +23,30 @@
                         <div class="card-header">
                             <h3 class="card-title">Tüm ilaçların listesi</h3>
                         </div>
+                        <div class="row mt-4">
+                            <form action="<?= SITE ?>data/islem.php" method="POST" enctype="multipart/form-data">
+                                <div class="card p-3 pt-4">
+                                    <div class="form-group d-flex">
+                                        <input type="file" class="form-control" required name="ilacFile">
+                                    <input type="submit" name="ilacImport" class="btn btn-primary ml-3">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" data-ajaxid = "ilacliste" class="table table-bordered table-striped">
+                            <table id="example1" data-ajaxid="ilacliste" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>İlaç Adı</th>
                                         <th>İlaç barkod numarası.</th>
                                         <th>İlaç miktarı</th>
                                         <th>İlaç tipi</th>
-                                        <th witdh=50 >İşlemler</th>
+                                        <th witdh=50>İşlemler</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>

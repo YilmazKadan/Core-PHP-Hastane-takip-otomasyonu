@@ -28,12 +28,12 @@ if (!empty($_SESSION['uye']) and $_SESSION['uye']['KULLANICIYETKI'] >= 2) {
                     if ($tablo == "hastane.users") {
                         $fotograf = $VT->veriGetir("Select FOTOGRAF from hastane.users", "where ID = ?", array($id))[0]["FOTOGRAF"];
                         unlink("../../images/uyeresim/" . $fotograf);
-
-                        $sil = $VT->sorguCalistir("DELETE FROM hastane." . $tablo . " where ID = ?", array($id));
-                        ($sil) ? $VT->mesajOlustur("basarili", $tabloAdi . " Silme işlemi başarılı") : $VT->mesajOlustur("hata", $tabloAdi . " Silme işlemi başarısız");
                     } else {
                         $VT->mesajOlustur("hata", $silmeHatasi);
                     }
+                    
+                    $sil = $VT->sorguCalistir("DELETE FROM hastane." . $tablo . " where ID = ?", array($id));
+                    ($sil) ? $VT->mesajOlustur("basarili", $tabloAdi . " Silme işlemi başarılı") : $VT->mesajOlustur("hata", $tabloAdi . " Silme işlemi başarısız");
                 } else {
                     $VT->mesajOlustur("hata", $tablo . " isminde bir tablo ismi yoktu hile hurda yapmayın");
                 }
@@ -62,6 +62,39 @@ if (!empty($_SESSION['uye']) and $_SESSION['uye']['KULLANICIYETKI'] >= 2) {
             }
 
             $VT->yonlendir(SITE . "sayfa/doktorekle");
+        }
+        // Hasta ekleme alanı 
+        else if (isset($_POST['hastaEkle'])) {
+
+            if (
+                
+                !empty($_POST['hastaAd'])
+                and  !empty($_POST['hastaSoyad'])
+                and  !empty($_POST['hastaTc'])
+                and  !empty($_POST['hastaCinsiyet'])
+                and  !empty($_POST['hastaTel'])
+                
+                ) {
+                $hastaAd = $VT->filter($_POST['hastaAd']);
+                $hastaSoyad = $VT->filter($_POST['hastaSoyad']);
+                $hastaTc = $VT->filter($_POST['hastaTc']);
+                $hastaCinsiyet = $VT->filter($_POST['hastaCinsiyet']);
+                $hastaTel = $VT->filter($_POST['hastaTel']);
+                $hastaDogumTarihi = $VT->filter($_POST['dogumTarihi']);
+
+                $kayitKontrol = $VT->veriGetir("Select * from hastane.hasta", " where h_tcno = ?", array($hastaTc));
+
+                if ($kayitKontrol == false) {
+                    $kayit = $VT->sorguCalistir("INSERT INTO hastane.hasta (h_ad, h_soyad , h_tcno , h_cinsiyet , h_telno , h_dogum_tarihi) VALUES ( ?, ?, ? , ? , ? , ?)", array($hastaAd, $hastaSoyad, $hastaTc, $hastaCinsiyet , $hastaTel, $hastaDogumTarihi));
+                    ($kayit) ? $VT->mesajOlustur("basarili", "Kayıt Başarılı!") : $VT->mesajOlustur("hata", "doktor kaydı sırasında bir hata meydana geldi!");
+                } else {
+                    $VT->mesajOlustur("hata", "Bu TC NO'da başka bir hasta kayıtlıdır !.");
+                }
+            } else {
+                $VT->mesajOlustur("hata", "Boş alan bırakmayınız!");
+            }
+
+            $VT->yonlendir(SITE . "sayfa/hastaekle");
         }
         // Poliklinik ekleme alanı 
         else if (isset($_POST['polEkle'])) {
@@ -107,7 +140,7 @@ if (!empty($_SESSION['uye']) and $_SESSION['uye']['KULLANICIYETKI'] >= 2) {
                     hastane.ilac (ilac_ad,ilac_barkod_no, ilac_miktar, ilac_tipi) VALUES (? , ? , ?, ? )",
 
 
-                        array($ilacAd, $ilacMiktar, $ilacBarkod, $ilacTipi)
+                        array($ilacAd, $ilacBarkod, $ilacMiktar, $ilacTipi)
                     );
                     ($kayit) ? $VT->mesajOlustur("basarili", "Kayıt Başarılı!") : $VT->mesajOlustur("hata", "Poliklinik kaydı sırasında bir hata meydana geldi!");
                 } else {
@@ -258,7 +291,6 @@ if (!empty($_SESSION['uye']) and $_SESSION['uye']['KULLANICIYETKI'] >= 2) {
 
             $VT->yonlendir(SITE . "sayfa/pol_kayit");
         }
-
         //***************************************ÜYE İŞLEMLERİ  **********************************************************************************************
         // Üye ekleme alanı 
         else if (isset($_POST['uyeEkle']) and $VT->yetkiKontrol(2)) {
